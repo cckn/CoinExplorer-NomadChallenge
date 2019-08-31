@@ -33,8 +33,7 @@ export default class extends React.Component {
 
   render() {
     const { coins, loading, error } = this.state;
-
-    return <CoinsPresenter coins={coins} loading={loading} error={error} />;
+    return <CoinsPresenter props={{ coins, loading, error }} />;
   }
 }
 
