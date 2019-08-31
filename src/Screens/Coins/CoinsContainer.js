@@ -11,11 +11,10 @@ export default class extends React.Component {
       const coins = data
         .filter(coin => coin.rank !== 0)
         .sort((a, b) => a.rank - b.rank)
-        .map(coin => ({
-          rank: coin.rank,
-          name: coin.name,
-          symbol: coin.symbol
-        }));
+        .map(coin => {
+          const { rank, name, symbol } = coin;
+          return { rank, name, symbol };
+        });
 
       this.setState({
         coins

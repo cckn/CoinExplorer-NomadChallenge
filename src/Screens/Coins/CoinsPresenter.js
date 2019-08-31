@@ -29,11 +29,15 @@ const CoinPresenter = class extends React.Component {
           <Error error={error} />
         ) : (
           <List>
-            {coins.map((coin, idx) => (
-              <Item key={idx}>
-                <Rank>#{coin.rank}</Rank> {coin.name} / {coin.symbol}
-              </Item>
-            ))}
+            {coins.map((coin, idx) => {
+              const { rank, name, symbol } = coin;
+              return (
+                <Item key={idx}>
+                  <Rank>#{rank}</Rank> {name} / {symbol}{" "}
+                  {rank === 1 ? "👑" : ""}
+                </Item>
+              );
+            })}
           </List>
         )}
       </Container>
@@ -43,7 +47,13 @@ const CoinPresenter = class extends React.Component {
 
 CoinPresenter.propTypes = {
   props: PropTypes.shape({
-    coins: PropTypes.array,
+    coins: PropTypes.arrayOf(
+      PropTypes.shape({
+        rank: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        symbol: PropTypes.string.isRequired
+      })
+    ),
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string
   })
